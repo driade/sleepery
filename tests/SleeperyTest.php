@@ -15,6 +15,7 @@ class SleeperyTest extends TestCase
         $time = time();
 
         Sleepery::assertNeverDreamt();
+        $this->assertSame([], Sleepery::getDreams());
 
         Sleepery::fake();
 
@@ -47,6 +48,7 @@ class SleeperyTest extends TestCase
         $time = time();
 
         Sleepery::assertNeverNapped();
+        $this->assertSame([], Sleepery::getNaps());
 
         Sleepery::fake();
 
