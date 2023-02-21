@@ -97,4 +97,38 @@ class SleeperyTest extends TestCase
             $this->assertSame($e->getMessage(), "Invalid nap 1000");
         }
     }
+
+    /**
+     * @test
+     * @return void
+     * */
+    public function itThrowsAnExceptionItDreamt()
+    {
+        Sleepery::fake();
+        Sleepery::dream(1);
+
+        try {
+            Sleepery::assertNeverDreamt();
+            throw new \Exception;
+        } catch (\Exception$e) {
+            $this->assertSame($e->getMessage(), "I had a dream");
+        }
+    }
+
+    /**
+     * @test
+     * @return void
+     * */
+    public function itThrowsAnExceptionItNapped()
+    {
+        Sleepery::fake();
+        Sleepery::nap(1);
+
+        try {
+            Sleepery::assertNeverNapped();
+            throw new \Exception;
+        } catch (\Exception$e) {
+            $this->assertSame($e->getMessage(), "I had a nap");
+        }
+    }
 }

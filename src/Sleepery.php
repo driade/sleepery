@@ -56,7 +56,7 @@ final class Sleepery
     public static function assertNapped(int $micro_seconds)
     {
         if ( ! in_array($micro_seconds, self::$naps, true)) {
-            throw new \Exception("Invalid map " . $micro_seconds);
+            throw new \Exception("Invalid nap " . $micro_seconds);
         }
     }
 
@@ -64,7 +64,7 @@ final class Sleepery
     public static function assertNeverDreamt()
     {
         if (self::$dreams !== []) {
-            throw new \Exception();
+            throw new \Exception("I had a dream");
         }
     }
 
@@ -72,7 +72,7 @@ final class Sleepery
     public static function assertNeverNapped()
     {
         if (self::$naps !== []) {
-            throw new \Exception();
+            throw new \Exception("I had a nap");
         }
     }
 
