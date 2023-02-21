@@ -44,14 +44,36 @@ final class Sleepery
         self::$naps[] = $micro_seconds;
     }
 
-    public static function assertDreamt(int $seconds): bool
+    /** @return void */
+    public static function assertDreamt(int $seconds)
     {
-        return in_array($seconds, self::$dreams, true);
+        if ( ! in_array($seconds, self::$dreams, true)) {
+            throw new \Exception("Invalid dream " . $seconds);
+        }
     }
 
-    public static function assertNapped(int $micro_seconds): bool
+    /** @return void */
+    public static function assertNapped(int $micro_seconds)
     {
-        return in_array($micro_seconds, self::$naps, true);
+        if ( ! in_array($micro_seconds, self::$naps, true)) {
+            throw new \Exception("Invalid map " . $micro_seconds);
+        }
+    }
+
+    /** @return void */
+    public static function assertNeverDreamt()
+    {
+        if (self::$dreams !== []) {
+            throw new \Exception();
+        }
+    }
+
+    /** @return void */
+    public static function assertNeverNapped()
+    {
+        if (self::$naps !== []) {
+            throw new \Exception();
+        }
     }
 
     public static function isDreaming(): bool

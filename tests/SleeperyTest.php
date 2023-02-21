@@ -6,10 +6,15 @@ use PHPUnit\Framework\TestCase;
 
 class SleeperyTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     * @return void
+     * */
     public function itDreamsSeconds()
     {
         $time = time();
+
+        Sleepery::assertNeverDreamt();
 
         Sleepery::fake();
 
@@ -33,10 +38,15 @@ class SleeperyTest extends TestCase
         $this->assertTrue(time() - $time >= 1);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @return void
+     * */
     public function itDreamsMicroSeconds()
     {
         $time = time();
+
+        Sleepery::assertNeverNapped();
 
         Sleepery::fake();
 
@@ -58,5 +68,33 @@ class SleeperyTest extends TestCase
         Sleepery::nap(1000000);
 
         $this->assertTrue(time() - $time >= 1);
+    }
+
+    /**
+     * @test
+     * @return void
+     * */
+    public function itThrowsAnExceptionInvalidDream()
+    {
+        try {
+            Sleepery::assertDreamt(1);
+            throw new \Exception;
+        } catch (\Exception$e) {
+            $this->assertSame($e->getMessage(), "Invalid dream 1");
+        }
+    }
+
+    /**
+     * @test
+     * @return void
+     * */
+    public function itThrowsAnExceptionInvalidNap()
+    {
+        try {
+            Sleepery::assertNapped(1000);
+            throw new \Exception;
+        } catch (\Exception$e) {
+            $this->assertSame($e->getMessage(), "Invalid nap 1000");
+        }
     }
 }

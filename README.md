@@ -51,6 +51,14 @@ Sleepery::assertNapped(1000);
 You may also use the following functions
 
 ```php
+Sleepery::assertNeverDreamt(); // no call to sleep() was made
+```
+
+```php
+Sleepery::assertNeverNapped(); // no call to usleep() was made
+```
+
+```php
 Sleepery::getDreams(); // returns all the dream() calls while dreaming
 ```
 

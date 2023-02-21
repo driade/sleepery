@@ -1,4 +1,4 @@
-name: PHPFmt
+name: Sleepery
 
 on:
   push:
